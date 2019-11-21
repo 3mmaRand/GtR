@@ -14,6 +14,9 @@ grants %>%
 # creating word frequency tables
 # grouping by year, research council, and reasearch organisation
 # only took about 2 minutes on this set up
+# 
+# English stop words from three lexicons (snowball and SMART
+# sets are pulled from the tm package). 
 words <- grants %>%
   group_by(start_year, 
            i_funding_org_name,
