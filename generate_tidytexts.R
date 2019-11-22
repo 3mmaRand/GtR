@@ -17,7 +17,7 @@ grants %>%
 # 
 # English stop words from three lexicons (snowball and SMART
 # sets are pulled from the tm package). 
-words <- grants %>%
+words_by_year_rc_ro <- grants %>%
   group_by(start_year, 
            i_funding_org_name,
            lead_ro_name) %>% 
@@ -26,7 +26,21 @@ words <- grants %>%
   count(word, sort = TRUE) 
 # write to file
 file <- "tidy_texts/words_by_year_rc_ro.txt"
-write.table(words, file)
+write.table(words_by_year_rc_ro, file)
+
+# creating word frequency tables
+# grouping by year and research council
+# only took about 2 minute on this set up
+# sets are pulled from the tm package). 
+words_by_year_rc <- grants %>%
+  group_by(start_year, 
+           i_funding_org_name) %>% 
+  unnest_tokens(word, abstract) %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) 
+# write to file
+file <- "tidy_texts/words_by_year_rc.txt"
+write.table(words_by_year_rc, file)
 
 # zip processed data files for uploading to github
 files2zip <- dir("tidy_texts/", full.names = TRUE)
