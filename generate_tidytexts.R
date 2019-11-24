@@ -12,6 +12,21 @@ grants %>%
 
 
 # creating word frequency tables
+# no grouping
+# only took about 2 minutes on this set up
+# 
+# English stop words from three lexicons (snowball and SMART
+# sets are pulled from the tm package). 
+words <- grants %>%
+  unnest_tokens(word, abstract) %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) 
+# write to file
+file <- "tidy_texts/words.txt"
+write.table(words, file)
+
+
+# creating word frequency tables
 # grouping by year, research council, and reasearch organisation
 # only took about 2 minutes on this set up
 # 
