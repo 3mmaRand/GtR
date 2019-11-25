@@ -57,6 +57,16 @@ words_by_year_rc <- grants %>%
 file <- "tidy_texts/words_by_year_rc.txt"
 write.table(words_by_year_rc, file)
 
+
+
+# creating bigram frequency tables
+# grouping by year, research council, and reasearch organisation
+
+
+
+
+
+
 # zip processed data files for uploading to github
 files2zip <- dir("tidy_texts/", full.names = TRUE)
 zip(zipfile = "tidy_texts_data.zip", files = files2zip)
